@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
     Tela_game -> addItem(jogador);
     Tela_game -> addItem(escada);
 
-    QPixmap ricardo_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-master\\ricardo.png"));
-    QPixmap parede_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-master\\parede.png"));  // ARRUMA ARROMBAF
-    QPixmap chao_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-master\\chao.png"));
-    QPixmap escada_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-master\\escada.png"));
+    QPixmap ricardo_png(QPixmap("C:\\Users\\6462340\\Desktop\\OscarEOsAlho-Sec-o\\ricardo.png"));
+    QPixmap parede_png(QPixmap("C:\\Users\\6462340\\Desktop\\OscarEOsAlho-Sec-o\\parede.png"));  // ARRUMA ARROMBAF
+    QPixmap chao_png(QPixmap("C:\\Users\\6462340\\Desktop\\OscarEOsAlho-Sec-o\\chao.png"));
+    QPixmap escada_png(QPixmap("C:\\Users\\6462340\\Desktop\\OscarEOsAlho-Sec-o\\escada.png"));
 
     qDebug()<<" "<<QDir::currentPath();
 

@@ -3,10 +3,70 @@
 #include <QKeyEvent>
 #include <QList>
 
-    void Player::keyPressEvent(QKeyEvent *event){
-        if (event->key() == Qt::Key_Left){
-            if(x() == -360){
-                setPos(x(),y());
+int Player::getPontoUpgrade() const
+{
+    return pontoUpgrade;
+}
+
+void Player::setPontoUpgrade(int value)
+{
+    pontoUpgrade = value;
+}
+
+int Player::getNivel() const
+{
+    return nivel;
+}
+
+void Player::setNivel(int value)
+{
+    nivel = value;
+}
+
+int Player::getCapacete() const
+{
+    return capacete;
+}
+
+void Player::setCapacete(int value)
+{
+    capacete = value;
+}
+
+int Player::getEspada() const
+{
+    return espada;
+}
+
+void Player::setEspada(int value)
+{
+    espada = value;
+}
+
+int Player::getPeitoral() const
+{
+    return peitoral;
+}
+
+void Player::setPeitoral(int value)
+{
+    peitoral = value;
+}
+
+int Player::getPotion() const
+{
+    return potion;
+}
+
+void Player::setPotion(int value)
+{
+    potion = value;
+}
+
+void Player::keyPressEvent(QKeyEvent *event){
+    if (event->key() == Qt::Key_Left){
+        if(x() == -360){
+            setPos(x(),y());
             }else{
                 setPos(x()-40,y());
             }
