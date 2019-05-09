@@ -34,3 +34,6 @@ HEADERS += \
     saida.h \
     entidade.h \
     inimigo.h
+
+RESOURCES += \
+    imagens.qrc
