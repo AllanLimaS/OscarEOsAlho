@@ -69,11 +69,18 @@ void Player::setPotion(int value)
     potion = value;
 }
     int inimigos_mapa = -1; // SLA FUNCIONA
+    int quant = 0;
+
 
 void Player::criainimigo(){ // TENTAR COLOCAR EM INIMIGO
-
+    quant = rand()%4;
+    if(quant == 0){
+        quant = 1;
+    }
+    for(int i =0; i < quant; i++){
         Inimigo * bolsonaro = new Inimigo();
         scene()->addItem(bolsonaro);
+    }
 
 }
 
@@ -123,7 +130,7 @@ void Player::keyPressEvent(QKeyEvent *event){
                 if(inimigos_mapa == 0){
                     setPos(0, 0);
                     criainimigo();
-                    inimigos_mapa = inimigos_mapa + 1;
+                    inimigos_mapa = inimigos_mapa + quant;
                 }
             };
 

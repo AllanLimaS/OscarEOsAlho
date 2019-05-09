@@ -24,7 +24,7 @@ Inimigo::Inimigo(){
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(50);
+    timer->start(500);
 }
 
 void Inimigo::move(){
@@ -35,31 +35,23 @@ void Inimigo::move(){
 
     switch(doideira){
         case 00:
-        if( x() != 40){
             a = 40;
             b = 0;
-        }
         break;
 
         case 01:        //esquerda
-        if( x() != -360){
             a = -40;
             b = 0;
-        }
         break;
 
         case 02:        //baixo
-        if( y() !=40){
             a =0;
             b = 40;
-        }
         break;
 
         case 03:
-        if( y() != -360){
             a = 0;
             b = -40;
-        }
         break;
     }
     setPos(x() + a, y () + b);
