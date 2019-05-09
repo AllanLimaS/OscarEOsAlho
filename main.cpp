@@ -12,17 +12,13 @@
 #include <windows.h>
 #include <time.h>
 
-
-
 using namespace std;
-
 
 int main(int argc, char *argv[])
 {
     srand(time(NULL));
     int matriz[13][13];             // 0 = espaço branco, 1 == parede
     paredes_mapa(matriz);
-    int i = 0, j=0;
 
     QApplication a(argc, argv);
 
@@ -36,9 +32,9 @@ int main(int argc, char *argv[])
     Tela_game -> addItem(escada);
 
 
-    QPixmap ricardo_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-seco_v1\\ricardo.png"));
-    QPixmap parede_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-seco_v1\\parede.png"));  // ARRUMA ARROMBAF
-    QPixmap chao_png(QPixmap("C:\\Users\\Gustavo Mafra\\Desktop\\OscarEOsAlho-seco_v1\\chao.png"));
+    QPixmap ricardo_png(QPixmap(":/png/imagens/ricardo.png"));
+    QPixmap parede_png(QPixmap(":/png/imagens/parede.png"));  // ARRUMA ARROMBAF
+    QPixmap chao_png(QPixmap(":/png/imagens/chao.png"));
 
 
     qDebug()<<" "<<QDir::currentPath();
