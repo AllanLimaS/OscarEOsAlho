@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\player.o
+./release\saida.o
+./release\entidade.o
+./release\menu.o
+./release\inimigo.o
+./release\parede.o
+./release\qrc_img.o
+./release\moc_menu.o
+./release\moc_inimigo.o
+);
