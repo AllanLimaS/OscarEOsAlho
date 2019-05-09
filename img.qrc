@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/png">
+        <file>imagens/bolsonaro.png</file>
+        <file>imagens/chao.png</file>
+        <file>imagens/escada.png</file>
+        <file>imagens/parede.png</file>
+        <file>imagens/ricardo.png</file>
+        <file>imagens/alho.png</file>
+    </qresource>
+</RCC>

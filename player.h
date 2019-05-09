@@ -2,13 +2,15 @@
 #define PLAYER_H
 #include <QGraphicsRectItem>
 #include "entidade.h"
+#include "menu.h"
+
 
 class Player: public QGraphicsRectItem, public Entidade
 {
 private:
     int pontoUpgrade, nivel;
     int capacete, espada, peitoral, potion;
-
+    Menu mainMenu;
 
 public:
     void keyPressEvent(QKeyEvent * event);
@@ -24,7 +26,10 @@ public:
     void setPeitoral(int value);
     int getPotion() const;
     void setPotion(int value);
-    void criainimigo();
+    void initPlayer();
+    void atualizaPontos();
+    void atualizaPlayer();
+     void criainimigo();
 };
 
 #endif // PLAYER_H

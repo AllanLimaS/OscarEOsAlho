@@ -1,6 +1,5 @@
 #include "saida.h"
 #include <QGraphicsScene>
-
 Saida::Saida()
 {
     QPixmap escada_png(QPixmap(":/png/imagens/escada.png"));

@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\player.o
+./debug\saida.o
+./debug\entidade.o
+./debug\menu.o
+./debug\inimigo.o
+./debug\parede.o
+./debug\qrc_img.o
+./debug\moc_menu.o
+./debug\moc_inimigo.o
+);

@@ -1,7 +1,9 @@
 #include "inimigo.h"
+#include "parede.h"
 #include <QTimer>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
+#include <QList>
 #include <windows.h>
 
 #include <qDebug>
@@ -20,11 +22,10 @@ Inimigo::Inimigo(){
     }
     setRect(posa + 1,posb + 1,38,38);              // CRIA BOLSONARO
     setBrush(QBrush(bolsonaro_png));
-    qDebug()<<x()<<endl<<y();
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(500);
+    timer->start(200);
 }
 
 void Inimigo::move(){
@@ -55,8 +56,12 @@ void Inimigo::move(){
         break;
     }
     setPos(x() + a, y () + b);
-
-    qDebug()<<x()<<endl<<y();
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for(int  i = 0, n = colliding_items.size(); i < n; i++){
+        if(typeid(*(colliding_items[i]))== typeid (Parede)){
+            setPos(x() - a, y () - b);
+         }
+    }
 }
 
 
