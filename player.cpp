@@ -1,7 +1,13 @@
 #include "player.h"
 #include "saida.h"
+#include "inimigo.h"
 #include <QKeyEvent>
 #include <QList>
+#include <QDebug>
+#include <QGraphicsItem>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <windows.h>
 
 int Player::getPontoUpgrade() const
 {
@@ -121,7 +127,33 @@ void Player :: atualizaPlayer(){ // PASSA OS DADOS DO MENU PARA O JOGADOR
     this->setNivel(this->mainMenu.getNivel());
 }
 
+
+int inimigos_mapa = -1; // SLA FUNCIONA
+int quant = 0;
+
+
+void Player::criainimigo(){ // TENTAR COLOCAR EM INIMIGO
+    quant = rand()%4;
+    if(quant == 0){
+        quant = 1;
+    }
+    for(int i =0; i < quant; i++){
+        Inimigo * bolsonaro = new Inimigo();
+        scene()->addItem(bolsonaro);
+    }
+
+}
+
+
+
+
+
 void Player::keyPressEvent(QKeyEvent *event){
+
+    if(inimigos_mapa == -1){
+        criainimigo();
+        inimigos_mapa = quant;
+    }
 
 
     if (event->key() == Qt::Key_Escape){
@@ -129,6 +161,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         mainMenu.show();
         atualizaPlayer();
         this->setFocus();
+        atualizaPlayer();
     }
 
     if (event->key() == Qt::Key_Left){
@@ -171,7 +204,18 @@ void Player::keyPressEvent(QKeyEvent *event){
         QList<QGraphicsItem *> colliding_items = collidingItems();
         for(int  i = 0, n = colliding_items.size(); i < n; i++){
             if(typeid(*(colliding_items[i]))== typeid (Saida)){
-                setPos(0, 0);
+                if(inimigos_mapa == 0){
+                    setPos(0, 0);
+                    criainimigo();
+                    inimigos_mapa = inimigos_mapa + quant;
+                }
+            };
+
+           if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
+                scene()->removeItem(colliding_items[i]);
+                delete (colliding_items[i]);
+                inimigos_mapa = inimigos_mapa - 1;
+
             };
         }
 

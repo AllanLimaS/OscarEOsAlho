@@ -15,7 +15,9 @@ SOURCES += main.cpp \
     player.cpp \
     saida.cpp \
     entidade.cpp \
-    menu.cpp
+    menu.cpp \
+    inimigo.cpp \
+    parede.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -33,7 +35,12 @@ HEADERS += \
     player.h \
     saida.h \
     entidade.h \
-    menu.h
+    menu.h \
+    inimigo.h \
+    parede.h
 
 FORMS += \
     menu.ui
+
+RESOURCES += \
+    img.qrc

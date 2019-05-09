@@ -65,6 +65,10 @@ private slots:
 
     void on_B_hp_mais_clicked();
 
+    void on_B_forca_menos_clicked();
+
+    void on_B_forca_mais_clicked();
+
 private:
     Ui::Menu *ui;
 };

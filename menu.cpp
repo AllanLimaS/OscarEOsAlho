@@ -188,3 +188,22 @@ void Menu::on_B_hp_mais_clicked()
 
     this->atualizaPontos();
 }
+
+void Menu::on_B_forca_menos_clicked()
+{
+    if(this->getForca() > 1){
+        this->setForca( this->getForca() - 1);
+        this->pontosUgrade ++;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_forca_mais_clicked()
+{
+    if(this->pontosUgrade > 0){
+        this->setForca( this->getForca() + 1);
+        this->pontosUgrade --;
+    }
+
+    this->atualizaPontos();
+}

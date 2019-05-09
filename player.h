@@ -29,6 +29,7 @@ public:
     void initPlayer();
     void atualizaPontos();
     void atualizaPlayer();
+     void criainimigo();
 };
 
 #endif // PLAYER_H
