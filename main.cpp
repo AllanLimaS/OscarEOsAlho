@@ -23,8 +23,20 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QGraphicsScene * Tela_game = new QGraphicsScene;
+    Tela_game->setBackgroundBrush(QPixmap(":/png/imagens/parede.png"));
     Player * jogador = new Player();
     Saida * escada = new Saida();
+
+    QPixmap chao_png(QPixmap(":/png/imagens/chao.png"));
+    for(int i = 0;i<13;i++){
+        for(int j = 0; j<13;j++){
+
+            if (matriz[i][j]==0){
+                Tela_game->addRect(QRect(QPoint(i*40,j*40),QSize(40,40)),QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin),QBrush(chao_png));
+            }
+
+        }
+    }
 
 
     for(int i = 0; i<13; i++){
@@ -41,22 +53,14 @@ int main(int argc, char *argv[])
     Tela_game -> addItem(escada);
 
     QPixmap ricardo_png(QPixmap(":/png/imagens/ricardo.png"));
-    QPixmap chao_png(QPixmap(":/png/imagens/chao.png"));
+
 
     qDebug()<<" "<<QDir::currentPath();
 
     jogador->setRect(400,400,40,40);
     jogador->setBrush(QBrush(ricardo_png));       // CRIA O PUTO
 
-    for(int i = 0;i<13;i++){
-        for(int j = 0; j<13;j++){
 
-            if (matriz[i][j]==0){
-                Tela_game->addRect(QRect(QPoint(i*40,j*40),QSize(40,40)),QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin),QBrush(chao_png));
-            }
-
-        }
-    }
 
     jogador->initPlayer();
     jogador->setFlag(QGraphicsItem::ItemIsFocusable); // MANTEM FOCO NO BALLOTIN
