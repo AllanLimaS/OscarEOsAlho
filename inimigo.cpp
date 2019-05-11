@@ -6,11 +6,17 @@
 #include <QList>
 #include <windows.h>
 
+
 #include <qDebug>
 
 Inimigo::Inimigo(){
 
-    QPixmap bolsonaro_png(QPixmap(":/png/imagens/bolsonaro.png"));
+    if(rand()%2 == 1){
+        setBrush(QPixmap(":/png/imagens/chuchu1.png"));
+    }else{
+        setBrush(QPixmap(":/png/imagens/chuchu2.png"));
+    }
+
     int posa = 0, posb = 0;
     posa = rand()%8 * 40;
     posb = rand()%8 * 40;
@@ -21,7 +27,6 @@ Inimigo::Inimigo(){
         posb = 40;
     }
     setRect(posa + 1,posb + 1,38,38);              // CRIA BOLSONARO
-    setBrush(QBrush(bolsonaro_png));
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
