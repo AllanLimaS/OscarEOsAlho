@@ -117,7 +117,6 @@ Menu::~Menu()
 void Menu::on_pushButton_clicked()
 {
 
-
 }
 
 void Menu :: atualizaPontos(){ // PASSA OS PONTOS DO JOGADOR PARA O MENU
