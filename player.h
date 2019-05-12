@@ -8,6 +8,8 @@
 class Player: public QGraphicsRectItem, public Entidade
 {
 private:
+    QGraphicsRectItem maxLifeBar;
+    QGraphicsRectItem lifeBar;
     int pontoUpgrade, nivel;
     int capacete, espada, peitoral, potion;
     Menu mainMenu;

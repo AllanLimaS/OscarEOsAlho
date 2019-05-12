@@ -71,6 +71,7 @@ void Player::setPotion(int value)
 }
 
 void Player::initPlayer(){
+
     this->setNivel(0);
     this->setEspada(1);
     this->setPotion(0);
@@ -80,6 +81,14 @@ void Player::initPlayer(){
     this->setLife(5);
     this->setMaxLife(5);
     this->setForca(1);
+    this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);
+    this->maxLifeBar.setBrush(QBrush(Qt::darkRed));
+    this->scene()->addItem(&maxLifeBar);
+
+    this->lifeBar.setRect(0,550,this->getLife()*30,20);
+    this->lifeBar.setBrush(QBrush(Qt::red));
+    this->scene()->addItem(&lifeBar);
+    qDebug()<<getLife();
 }
 
 void Player :: atualizaPontos(){ // PASSA OS PONTOS DO JOGADOR PARA O MENU
@@ -126,6 +135,9 @@ void Player :: atualizaPlayer(){ // PASSA OS DADOS DO MENU PARA O JOGADOR
     this->setForca(this->mainMenu.getForca());
     this->setPontoUpgrade(this->mainMenu.getPontosUgrade());
     this->setNivel(this->mainMenu.getNivel());
+
+    this->lifeBar.setRect(0,550,this->getLife()*30,20);
+    this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);
 }
 
 
@@ -158,6 +170,8 @@ void Player::keyPressEvent(QKeyEvent *event){
 
     }
 
+    this->lifeBar.setRect(0,550,this->getLife()*30,20);             // ISSO ATUALIZA A BARRA DE
+    this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);       //  VIDAAAAAAA
 
 
     if (event->key() == Qt::Key_Escape){

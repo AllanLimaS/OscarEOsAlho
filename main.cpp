@@ -24,8 +24,10 @@ int main(int argc, char *argv[])
 
     QGraphicsScene * Tela_game = new QGraphicsScene;
     Tela_game->setBackgroundBrush(QPixmap(":/png/imagens/parede.png"));
-    Player * jogador = new Player();
+
+    Player * jogador = new Player(); 
     Saida * escada = new Saida();
+
 
     QPixmap chao_png(QPixmap(":/png/imagens/chao.png"));
     for(int i = 0;i<13;i++){
