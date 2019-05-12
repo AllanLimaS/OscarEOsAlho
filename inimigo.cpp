@@ -5,11 +5,14 @@
 #include <QGraphicsScene>
 #include <QList>
 #include <windows.h>
-
-
 #include <qDebug>
 
 Inimigo::Inimigo(){
+
+    this->setMaxLife(10);       //
+    this->setLife(10);          // seta os stats dos inimigos
+    this->setForca(10);         //
+    this->setDefesa(10);        //
 
     if(rand()%2 == 1){
         setBrush(QPixmap(":/png/imagens/chuchu1.png"));
@@ -26,11 +29,11 @@ Inimigo::Inimigo(){
     if(posb == 0 ){
         posb = 40;
     }
-    setRect(posa + 1,posb + 1,38,38);              // CRIA BOLSONARO
+    setRect(posa + 1,posb + 1,38,38);              // CRIA puto
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(200);
+    timer->start(500);
 }
 
 void Inimigo::move(){

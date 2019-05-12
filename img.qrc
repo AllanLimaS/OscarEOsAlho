@@ -2,11 +2,12 @@
     <qresource prefix="/png">
         <file>imagens/bolsonaro.png</file>
         <file>imagens/chao.png</file>
-        <file>imagens/escada.png</file>
         <file>imagens/parede.png</file>
         <file>imagens/ricardo.png</file>
         <file>imagens/alho.png</file>
         <file>imagens/chuchu1.png</file>
         <file>imagens/chuchu2.png</file>
+        <file>imagens/escada.png</file>
+        <file>imagens/loja.png</file>
     </qresource>
 </RCC>
