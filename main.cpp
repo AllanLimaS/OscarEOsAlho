@@ -12,6 +12,8 @@
 #include <windows.h>
 #include <time.h>
 
+#include <QDesktopWidget>
+
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -65,12 +67,14 @@ int main(int argc, char *argv[])
 
 
     jogador->initPlayer();
-    jogador->setFlag(QGraphicsItem::ItemIsFocusable); // MANTEM FOCO NO BALLOTIN
+    jogador->setFlag(QGraphicsItem::ItemIsFocusable); // MANTEM FOCO NO puto
     jogador->setFocus();
     jogador->atualizaPontos();
 
-    view.setFixedSize(800,600);
+    view.setGeometry(QRect(QApplication::desktop()->screenGeometry())); //seta a tela pro tamanho do desktop NICE
     view.show();
+
+    //view.showFullScreen();
     return a.exec();
 
 }

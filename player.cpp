@@ -2,6 +2,7 @@
 #include "saida.h"
 #include "inimigo.h"
 #include "bau.h"
+#include "loja.h"
 #include <QKeyEvent>
 #include <QList>
 #include <QDebug>
@@ -147,7 +148,10 @@ int PISO_ATUAL = 0;     //
 
 
 void Player::criainimigo(){
-    quant = rand()%4;
+    quant = PISO_ATUAL + rand()%3;
+    if(PISO_ATUAL > 5){
+        quant = quant -2;
+    }
     if(quant == 0){
         quant = 1;
     }
@@ -167,19 +171,24 @@ void Player::keyPressEvent(QKeyEvent *event){
     if(inimigos_mapa == -1){
         criainimigo();
         inimigos_mapa = quant;
-
     }
 
     this->lifeBar.setRect(0,550,this->getLife()*30,20);             // ISSO ATUALIZA A BARRA DE
     this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);       //  VIDAAAAAAA
 
 
-    if (event->key() == Qt::Key_Escape){
-        atualizaPontos();
-        mainMenu.show();
-        atualizaPlayer();
-        this->setFocus();
-        atualizaPlayer();
+    if (event->key() == Qt::Key_Escape){    // esc quita do game
+        exit(1);
+    }
+
+    if (event->key() == Qt::Key_Backspace){     // backspace abre menu
+        if(PISO_ATUAL ==5 or PISO_ATUAL ==10){  //SO PODE ABRIR O MENU NO PISO DA LOJA
+            atualizaPontos();
+            mainMenu.showMaximized();
+            atualizaPlayer();
+            this->setFocus();
+            atualizaPlayer();
+        }
     }
 
     if (event->key() == Qt::Key_Left){
@@ -221,13 +230,22 @@ void Player::keyPressEvent(QKeyEvent *event){
 
         QList<QGraphicsItem *> colliding_items = collidingItems();
         for(int  i = 0, n = colliding_items.size(); i < n; i++){
+
             if(typeid(*(colliding_items[i]))== typeid (Saida)){
+
                 if(inimigos_mapa == 0){
                     PISO_ATUAL = PISO_ATUAL + 1;
-                    if(PISO_ATUAL == 3 or PISO_ATUAL == 6 or PISO_ATUAL == 9){
+                    if(PISO_ATUAL == 2 or PISO_ATUAL == 4 or PISO_ATUAL == 9){
                         Bau * bau = new Bau();
                         scene()->addItem(bau);
-                    }else {
+                        inimigos_mapa = inimigos_mapa + 1;
+
+                    }else if(PISO_ATUAL == 5 or PISO_ATUAL == 10){
+                        Loja * loja = new Loja();
+                        scene()->addItem(loja);
+                        inimigos_mapa = inimigos_mapa + 1;
+
+                    }else{
                         criainimigo();
                         inimigos_mapa = inimigos_mapa + quant;
                    }
@@ -246,7 +264,15 @@ void Player::keyPressEvent(QKeyEvent *event){
            if(typeid(*(colliding_items[i]))== typeid (Bau)){
                 scene()->removeItem(colliding_items[i]);
                 delete (colliding_items[i]);
+                inimigos_mapa = inimigos_mapa - 1;  //SÓ SAI DA SALA SE PEGAR O BAU
                 // AKI SE FAZ UM SISTEMA Q ADICIONA ALHO NA MOCHILA
+
+           }
+
+           if(typeid(*(colliding_items[i]))== typeid (Loja)){
+                scene()->removeItem(colliding_items[i]);
+                delete (colliding_items[i]);
+                inimigos_mapa = inimigos_mapa - 1;  //SÓ SAI DA SALA SE PEGAR O ALEx, digo ,a loja
 
            }
         }

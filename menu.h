@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include <QWidget>
+#include <QDesktopWidget>
 
 namespace Ui {
 class Menu;
@@ -16,6 +17,7 @@ class Menu : public QWidget
 public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu();
+    void keyPressEvent(QKeyEvent * event);
     void atualizaPontos();
     void set_pontosUp(int pontos);
     void set_pontosLife(int pontos);
@@ -68,6 +70,10 @@ private slots:
     void on_B_forca_menos_clicked();
 
     void on_B_forca_mais_clicked();
+
+    void on_L_hp_linkHovered();
+
+    void on_L_hp_linkActivated();
 
 private:
     Ui::Menu *ui;

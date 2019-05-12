@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "ui_menu.h"
 #include <QGraphicsItem>
+#include <QKeyEvent>
 
 int Menu::getMaxLife() const
 {
@@ -106,7 +107,9 @@ Menu::Menu(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Menu)
 {
+    this->setGeometry(QRect(QApplication::desktop()->screenGeometry()));
     ui->setupUi(this);
+
 }
 
 Menu::~Menu()
@@ -114,8 +117,18 @@ Menu::~Menu()
     delete ui;
 }
 
+void Menu::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Backspace){    // backspace quita do menu
+        this->close();
+        atualizaPontos();
+    }
+}
+
 void Menu::on_pushButton_clicked()
 {
+    this->close();
+    atualizaPontos();
 
 }
 
@@ -172,6 +185,7 @@ void Menu :: set_pontosPotion(int pontos){
 void Menu::on_B_hp_menos_clicked()
 {
     if(this->life > 1){
+        this->MaxLife --;
         this->life --;
         this->pontosUgrade ++;
     }
@@ -181,6 +195,7 @@ void Menu::on_B_hp_menos_clicked()
 void Menu::on_B_hp_mais_clicked()
 {
     if(this->pontosUgrade > 0){
+        this->MaxLife ++;
         this->life ++;
         this->pontosUgrade --;
     }
