@@ -10,5 +10,6 @@
         <file>imagens/escada.png</file>
         <file>imagens/loja.png</file>
         <file>imagens/ahh.wav</file>
+        <file>imagens/ataque.png</file>
     </qresource>
 </RCC>
