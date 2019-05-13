@@ -11,5 +11,6 @@
         <file>imagens/loja.png</file>
         <file>imagens/ahh.wav</file>
         <file>imagens/ataque.png</file>
+        <file>imagens/boss.png</file>
     </qresource>
 </RCC>
