@@ -3,6 +3,7 @@
 #include "inimigo.h"
 #include "bau.h"
 #include "loja.h"
+#include "chefes.h"
 #include <QKeyEvent>
 #include <QList>
 #include <QDebug>
@@ -238,24 +239,31 @@ void Player::keyPressEvent(QKeyEvent *event){
         }
 
         else if(event->key() == Qt::Key_Space){
-        atualizaPlayer();
-        QPixmap ataque_png(QPixmap(":/png/imagens/ataque.png"));
-        setRect(360, 360, 120, 120);
-        setPos(x(), y());
-        setBrush(QPixmap(":/png/imagens/ataque.png"));
+            atualizaPlayer();
+            QPixmap ataque_png(QPixmap(":/png/imagens/ataque.png"));
+            setRect(360, 360, 120, 120);
+            setPos(x(), y());
+            setBrush(QPixmap(":/png/imagens/ataque.png"));
 
-        QList<QGraphicsItem *> colliding_items = collidingItems();
-        for(int  i = 0, n = colliding_items.size(); i < n; i++){
-                if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
-                scene()->removeItem(colliding_items[i]);
-                delete (colliding_items[i]);
-                inimigos_mapa = inimigos_mapa - 1;
+            QList<QGraphicsItem *> colliding_items = collidingItems();
+            for(int  i = 0, n = colliding_items.size(); i < n; i++){
+                    if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
+                    scene()->removeItem(colliding_items[i]);
+                    delete (colliding_items[i]);
+                    inimigos_mapa = inimigos_mapa - 1;
+                    // AKI FAZ A LOGICA DE DAR DANO NOS CHUCHU SELVAGENS
+                }
+                    if(typeid(*(colliding_items[i]))== typeid (Chefes)){
+                    scene()->removeItem(colliding_items[i]);
+                    delete (colliding_items[i]);
+                    inimigos_mapa = inimigos_mapa - 1;
+                    // AKI FAZ A LOGICA DE DAR DANO NO FELSKI
+                }
             }
-        }
-        QTimer * timer = new QTimer();
-        connect(timer, SIGNAL(timeout()), this, SLOT(Volta()));
+            QTimer * timer = new QTimer();
+            connect(timer, SIGNAL(timeout()), this, SLOT(Volta()));
 
-        timer->start(1500);
+            timer->start(1500);
 
 
         }
@@ -277,12 +285,17 @@ void Player::keyPressEvent(QKeyEvent *event){
                         scene()->addItem(loja);
                         inimigos_mapa = inimigos_mapa + 1;
 
+                    }else if(PISO_ATUAL == 11){
+                        Chefes * chefe = new Chefes();
+                        scene()->addItem(chefe);
+                        inimigos_mapa = inimigos_mapa + 1;
+
+
                     }else{
                         criainimigo();
                         inimigos_mapa = inimigos_mapa + quant;
                    }
                    setPos(0, 0);
-
                 }
             };
 
@@ -295,7 +308,8 @@ void Player::keyPressEvent(QKeyEvent *event){
            if(typeid(*(colliding_items[i]))== typeid (Bau)){
                 scene()->removeItem(colliding_items[i]);
                 delete (colliding_items[i]);
-                inimigos_mapa = inimigos_mapa - 1;  //SÓ SAI DA SALA SE PEGAR O BAU
+                inimigos_mapa = inimigos_mapa - 1;
+                //SÓ SAI DA SALA SE PEGAR O BAU
                 // AKI SE FAZ UM SISTEMA Q ADICIONA ALHO NA MOCHILA
 
            }
@@ -308,7 +322,7 @@ void Player::keyPressEvent(QKeyEvent *event){
            }
         }
 
-  }
+ }
 
 
 

@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     menu.cpp \
     inimigo.cpp \
     parede.cpp \
-    bau.cpp
+    bau.cpp \
+    chefes.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -43,7 +44,8 @@ HEADERS += \
     menu.h \
     inimigo.h \
     parede.h \
-    bau.h
+    bau.h \
+    chefes.h
 
 FORMS += \
     menu.ui
