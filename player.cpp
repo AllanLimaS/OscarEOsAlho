@@ -162,6 +162,16 @@ void Player::criainimigo(){
 
 }
 
+void Player::Volta(){
+
+    setRect(400, 400, 40, 40);
+    setPos(x(), y());
+    QPixmap ricardo_png(QPixmap(":/png/imagens/ricardo.png"));
+    setBrush(QBrush(ricardo_png));
+
+
+}
+
 
 
 
@@ -227,6 +237,29 @@ void Player::keyPressEvent(QKeyEvent *event){
             }
         }
 
+        else if(event->key() == Qt::Key_Space){
+        atualizaPlayer();
+        QPixmap ataque_png(QPixmap(":/png/imagens/ataque.png"));
+        setRect(360, 360, 120, 120);
+        setPos(x(), y());
+        setBrush(QPixmap(":/png/imagens/ataque.png"));
+
+        QList<QGraphicsItem *> colliding_items = collidingItems();
+        for(int  i = 0, n = colliding_items.size(); i < n; i++){
+                if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
+                scene()->removeItem(colliding_items[i]);
+                delete (colliding_items[i]);
+                inimigos_mapa = inimigos_mapa - 1;
+            }
+        }
+        QTimer * timer = new QTimer();
+        connect(timer, SIGNAL(timeout()), this, SLOT(Volta()));
+
+        timer->start(1500);
+
+
+        }
+
         QList<QGraphicsItem *> colliding_items = collidingItems();
         for(int  i = 0, n = colliding_items.size(); i < n; i++){
 
@@ -254,9 +287,8 @@ void Player::keyPressEvent(QKeyEvent *event){
             };
 
            if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
-                scene()->removeItem(colliding_items[i]);
-                delete (colliding_items[i]);
-                inimigos_mapa = inimigos_mapa - 1;
+
+                // AKI DIMINUIA A VIDA DAI NÉ ??????
 
             };
 

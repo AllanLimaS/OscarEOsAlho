@@ -1,12 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <QGraphicsRectItem>
+#include <QObject>
 #include "entidade.h"
 #include "menu.h"
 
 
-class Player: public QGraphicsRectItem, public Entidade
-{
+class Player: public QObject, public QGraphicsRectItem, public Entidade{
+        Q_OBJECT
+
 private:
     QGraphicsRectItem maxLifeBar;
     QGraphicsRectItem lifeBar;
@@ -31,7 +33,9 @@ public:
     void initPlayer();
     void atualizaPontos();
     void atualizaPlayer();
-     void criainimigo();
+    void criainimigo();
+public slots:
+    void Volta();
 };
 
 #endif // PLAYER_H
