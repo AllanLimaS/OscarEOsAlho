@@ -167,7 +167,6 @@ void Player::criainimigo(){
 
 
 void Player::keyPressEvent(QKeyEvent *event){
-
     if(inimigos_mapa == -1){
         criainimigo();
         inimigos_mapa = quant;
@@ -182,9 +181,9 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 
     if (event->key() == Qt::Key_Backspace){     // backspace abre menu
-        if(PISO_ATUAL ==5 or PISO_ATUAL ==10){  //SO PODE ABRIR O MENU NO PISO DA LOJA
+        if(PISO_ATUAL % 5 == 0 || true){  //SO PODE ABRIR O MENU NO PISO DA LOJA
             atualizaPontos();
-            mainMenu.showMaximized();
+            mainMenu.show();
             atualizaPlayer();
             this->setFocus();
             atualizaPlayer();

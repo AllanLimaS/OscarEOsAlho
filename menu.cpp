@@ -2,6 +2,7 @@
 #include "ui_menu.h"
 #include <QGraphicsItem>
 #include <QKeyEvent>
+#include <QSound>
 
 int Menu::getMaxLife() const
 {
@@ -127,9 +128,8 @@ void Menu::keyPressEvent(QKeyEvent *event)
 
 void Menu::on_pushButton_clicked()
 {
+    QSound::play(":/png/imagens/ahh.wav");
     this->close();
-    atualizaPontos();
-
 }
 
 void Menu :: atualizaPontos(){ // PASSA OS PONTOS DO JOGADOR PARA O MENU
@@ -166,19 +166,18 @@ void Menu :: set_pontosMaxLife(int pontos){
 
 }
 void Menu :: set_pontosDefesa(int pontos){
-
+    this->ui->L_defesa->setText(QString::number(pontos));
 }
 void Menu :: set_pontosCapacete(int pontos){
-
+    this->ui->L_capacete->setText(QString::number(pontos));
 }
 void Menu :: set_pontosEspada(int pontos){
-
+    this->ui->L_espada->setText(QString::number(pontos));
 }
 void Menu :: set_pontosPeitoral(int pontos){
-
+    this->ui->L_peitoral->setText(QString::number(pontos));
 }
 void Menu :: set_pontosPotion(int pontos){
-
 }
 
 
@@ -205,6 +204,7 @@ void Menu::on_B_hp_mais_clicked()
 
 void Menu::on_B_forca_menos_clicked()
 {
+
     if(this->getForca() > 1){
         this->setForca( this->getForca() - 1);
         this->pontosUgrade ++;
@@ -219,5 +219,77 @@ void Menu::on_B_forca_mais_clicked()
         this->pontosUgrade --;
     }
 
+    this->atualizaPontos();
+}
+
+void Menu::on_B_defesa_menos_clicked()
+{
+    if(this->getDefesa() > 1){
+        this->setDefesa( this->getDefesa() - 1);
+        this->pontosUgrade ++;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_defesa_mais_clicked()
+{
+    if(this->pontosUgrade > 0){
+        this->setDefesa( this->getDefesa() + 1);
+        this->pontosUgrade --;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_capacete_menos_clicked()
+{
+    if(this->capacete > 1){
+        this->capacete = this->capacete - 1;
+        this->pontosUgrade ++;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_capacete_mais_clicked()
+{
+    if(this->pontosUgrade > 0){
+        this->capacete ++;
+        this->pontosUgrade --;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_espada_menos_clicked()
+{
+    if(this->espada > 1){
+        this->espada = this->espada - 1;
+        this->pontosUgrade ++;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_espada_mais_clicked()
+{
+    if(this->pontosUgrade > 0){
+        this->espada ++;
+        this->pontosUgrade --;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_peitoral_menos_clicked()
+{
+    if(this->peitoral > 1){
+        this->peitoral = this->peitoral - 1;
+        this->pontosUgrade ++;
+    }
+    this->atualizaPontos();
+}
+
+void Menu::on_B_peitoral_mais_clicked()
+{
+    if(this->pontosUgrade > 0){
+        this->peitoral ++;
+        this->pontosUgrade --;
+    }
     this->atualizaPontos();
 }

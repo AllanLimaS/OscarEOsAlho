@@ -75,6 +75,22 @@ private slots:
 
     void on_L_hp_linkActivated();
 
+    void on_B_defesa_menos_clicked();
+
+    void on_B_defesa_mais_clicked();
+
+    void on_B_capacete_menos_clicked();
+
+    void on_B_capacete_mais_clicked();
+
+    void on_B_espada_menos_clicked();
+
+    void on_B_espada_mais_clicked();
+
+    void on_B_peitoral_menos_clicked();
+
+    void on_B_peitoral_mais_clicked();
+
 private:
     Ui::Menu *ui;
 };
