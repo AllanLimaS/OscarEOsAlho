@@ -2,12 +2,12 @@
 
 int Entidade::getLife() const
 {
-    return life;
+    return this->life;
 }
 
 void Entidade::setLife(int value)
 {
-    life = value;
+    life =  value;
 }
 
 int Entidade::getMaxLife() const
