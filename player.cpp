@@ -79,10 +79,21 @@ void Player::initPlayer(){
     this->setPotion(0);
     this->setCapacete(1);
     this->setPeitoral(1);
-    this->setPontoUpgrade(10);
+    this->setPontoUpgrade(0);
     this->setLife(5);
     this->setMaxLife(5);
     this->setForca(1);
+
+     mainMenu.setNivel(0);
+     mainMenu.setEspada(1);
+     mainMenu.setPotion(0);
+     mainMenu.setCapacete(1);
+     mainMenu.setPeitoral(1);
+     mainMenu.setPontosUgrade(0);
+     mainMenu.setLife(5);
+     mainMenu.setMaxLife(5);
+     mainMenu.setForca(1);
+
     this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);
     this->maxLifeBar.setBrush(QBrush(Qt::darkRed));
     this->scene()->addItem(&maxLifeBar);
@@ -90,7 +101,7 @@ void Player::initPlayer(){
     this->lifeBar.setRect(0,550,this->getLife()*30,20);
     this->lifeBar.setBrush(QBrush(Qt::red));
     this->scene()->addItem(&lifeBar);
-    qDebug()<<getLife();
+
 }
 
 void Player :: atualizaPontos(){ // PASSA OS PONTOS DO JOGADOR PARA O MENU
@@ -192,7 +203,7 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 
     if (event->key() == Qt::Key_Backspace){     // backspace abre menu
-        if(PISO_ATUAL % 5 == 0 || true){  //SO PODE ABRIR O MENU NO PISO DA LOJA
+        if(PISO_ATUAL % 5 == 0 ){  //SO PODE ABRIR O MENU NO PISO DA LOJA
             atualizaPontos();
             mainMenu.show();
             atualizaPlayer();
@@ -251,6 +262,7 @@ void Player::keyPressEvent(QKeyEvent *event){
                     scene()->removeItem(colliding_items[i]);
                     delete (colliding_items[i]);
                     inimigos_mapa = inimigos_mapa - 1;
+                    mainMenu.setPontosUgrade(mainMenu.getPontosUgrade()+1);
                     // AKI FAZ A LOGICA DE DAR DANO NOS CHUCHU SELVAGENS
                 }
                     if(typeid(*(colliding_items[i]))== typeid (Chefes)){
@@ -301,6 +313,37 @@ void Player::keyPressEvent(QKeyEvent *event){
 
            if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
 
+
+               mainMenu.setLife(getLife() - 1);
+               atualizaPlayer();
+
+               if(mainMenu.getLife() <=0){
+                   PISO_ATUAL = 0;
+                   setPos(0, 0);
+                   initPlayer();
+               }
+
+               qDebug()<<this->getLife();
+
+                // AKI DIMINUIA A VIDA DAI NÉ ??????
+
+            };
+
+           if(typeid(*(colliding_items[i]))== typeid (Chefes)){
+
+
+               mainMenu.setLife(getLife() - 5);
+               atualizaPlayer();
+               if(mainMenu.getLife() <=0){
+                   PISO_ATUAL = 0;
+                   setPos(0, 0);
+                   initPlayer();
+                   delete (colliding_items[i]);
+                   inimigos_mapa= 0;
+               }
+
+               qDebug()<<this->getLife();
+
                 // AKI DIMINUIA A VIDA DAI NÉ ??????
 
             };
@@ -317,7 +360,8 @@ void Player::keyPressEvent(QKeyEvent *event){
            if(typeid(*(colliding_items[i]))== typeid (Loja)){
                 scene()->removeItem(colliding_items[i]);
                 delete (colliding_items[i]);
-                inimigos_mapa = inimigos_mapa - 1;  //SÓ SAI DA SALA SE PEGAR O ALEx, digo ,a loja
+                inimigos_mapa = inimigos_mapa - 1;
+                //SÓ SAI DA SALA SE PEGAR O ALEx, digo ,a loja
 
            }
         }
