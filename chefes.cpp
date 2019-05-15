@@ -15,7 +15,7 @@ Chefes::Chefes()
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(500);
+    timer->start(100);
 }
 
 void Chefes::move(){

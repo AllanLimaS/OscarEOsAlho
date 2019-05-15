@@ -4,7 +4,7 @@
 #include <QObject>
 #include "entidade.h"
 #include "menu.h"
-
+#include "tela_piso.h"
 
 class Player: public QObject, public QGraphicsRectItem, public Entidade{
         Q_OBJECT
@@ -15,6 +15,7 @@ private:
     int pontoUpgrade, nivel;
     int capacete, espada, peitoral, potion;
     Menu mainMenu;
+    Tela_piso * telaPiso = new Tela_piso();
 
 public:
     void keyPressEvent(QKeyEvent * event);
