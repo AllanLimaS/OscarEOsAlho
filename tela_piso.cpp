@@ -17,7 +17,7 @@ void Tela_piso::setPiso(int value)
     if(piso == 5 or piso == 10){
         setPlainText(QString("PISO : ") + QString::number(this->piso) + QString("    LOJA: Aperte backspace"));
     }
-    if(piso == 2 or piso == 4 or piso == 8){
+    if(piso == 2 or piso == 4 or piso == 9){
         setPlainText(QString("PISO : ") + QString::number(this->piso) + QString("    BAU"));
     }
     if(piso == 11){

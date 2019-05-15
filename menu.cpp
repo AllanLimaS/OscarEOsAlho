@@ -128,7 +128,6 @@ void Menu::keyPressEvent(QKeyEvent *event)
 
 void Menu::on_pushButton_clicked()
 {
-    QSound::play(":/png/imagens/ahh.wav");
     this->close();
 }
 
@@ -183,20 +182,20 @@ void Menu :: set_pontosPotion(int pontos){
 
 void Menu::on_B_hp_menos_clicked()
 {
-    if(this->life > 1){
+    if(this->MaxLife > 1){
         this->MaxLife --;
-        this->life --;
         this->pontosUgrade ++;
+        this->life = this->getMaxLife();
     }
     this->atualizaPontos();
 }
 
 void Menu::on_B_hp_mais_clicked()
 {
-    if(this->pontosUgrade > 0 && this->life < 15){
+    if(this->pontosUgrade > 1 && this->MaxLife < 15){
         this->MaxLife ++;
-        this->life ++;
-        this->pontosUgrade --;
+        this->life = this->getMaxLife();
+        this->pontosUgrade = this->pontosUgrade - 2;
     }
 
     this->atualizaPontos();
@@ -233,9 +232,9 @@ void Menu::on_B_defesa_menos_clicked()
 
 void Menu::on_B_defesa_mais_clicked()
 {
-    if(this->pontosUgrade > 0 and this->defesa <10){
+    if(this->pontosUgrade > 2 and this->defesa <10){
         this->setDefesa( this->getDefesa() + 1);
-        this->pontosUgrade --;
+        this->pontosUgrade = this->pontosUgrade - 3;
     }
     this->atualizaPontos();
 }
