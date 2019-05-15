@@ -193,7 +193,7 @@ void Menu::on_B_hp_menos_clicked()
 
 void Menu::on_B_hp_mais_clicked()
 {
-    if(this->pontosUgrade > 0){
+    if(this->pontosUgrade > 0 && this->life < 15){
         this->MaxLife ++;
         this->life ++;
         this->pontosUgrade --;
@@ -233,7 +233,7 @@ void Menu::on_B_defesa_menos_clicked()
 
 void Menu::on_B_defesa_mais_clicked()
 {
-    if(this->pontosUgrade > 0){
+    if(this->pontosUgrade > 0 and this->defesa <10){
         this->setDefesa( this->getDefesa() + 1);
         this->pontosUgrade --;
     }

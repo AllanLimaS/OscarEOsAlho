@@ -4,6 +4,7 @@
 #include "bau.h"
 #include "loja.h"
 #include "chefes.h"
+#include "tela_piso.h"
 #include <QKeyEvent>
 #include <QList>
 #include <QDebug>
@@ -189,6 +190,10 @@ void Player::Volta(){
 
 
 void Player::keyPressEvent(QKeyEvent *event){
+
+    scene()->addItem(telaPiso);
+    telaPiso->setPiso(PISO_ATUAL);
+
     if(inimigos_mapa == -1){
         criainimigo();
         inimigos_mapa = quant;
@@ -287,6 +292,7 @@ void Player::keyPressEvent(QKeyEvent *event){
 
                 if(inimigos_mapa == 0){
                     PISO_ATUAL = PISO_ATUAL + 1;
+                    telaPiso->setPiso(PISO_ATUAL);
                     if(PISO_ATUAL == 2 or PISO_ATUAL == 4 or PISO_ATUAL == 9){
                         Bau * bau = new Bau();
                         scene()->addItem(bau);
@@ -314,30 +320,39 @@ void Player::keyPressEvent(QKeyEvent *event){
            if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
 
 
+
+               if (mainMenu.getDefesa() < 5){
+                 mainMenu.setLife(getLife() - 3);
+                 atualizaPlayer();
+               } else if(mainMenu.getDefesa()>=5 and mainMenu.getDefesa()<=9){
+                   mainMenu.setLife(getLife() - 2);
+                   atualizaPlayer();
+
+               } else if(mainMenu.getDefesa()>9){
                mainMenu.setLife(getLife() - 1);
                atualizaPlayer();
+               }
 
                if(mainMenu.getLife() <=0){
                    PISO_ATUAL = 0;
                    setPos(0, 0);
                    initPlayer();
+                   telaPiso->setPiso(PISO_ATUAL);
                }
 
                qDebug()<<this->getLife();
-
-                // AKI DIMINUIA A VIDA DAI NÉ ??????
-
-            };
+          };
 
            if(typeid(*(colliding_items[i]))== typeid (Chefes)){
 
 
-               mainMenu.setLife(getLife() - 5);
+               mainMenu.setLife(getLife() - 7);
                atualizaPlayer();
                if(mainMenu.getLife() <=0){
                    PISO_ATUAL = 0;
                    setPos(0, 0);
                    initPlayer();
+                   telaPiso->setPiso(PISO_ATUAL);
                    delete (colliding_items[i]);
                    inimigos_mapa= 0;
                }
@@ -354,6 +369,7 @@ void Player::keyPressEvent(QKeyEvent *event){
                 inimigos_mapa = inimigos_mapa - 1;
                 //SÓ SAI DA SALA SE PEGAR O BAU
                 // AKI SE FAZ UM SISTEMA Q ADICIONA ALHO NA MOCHILA
+                mainMenu.setPontosUgrade(mainMenu.getPontosUgrade()+5);
 
            }
 
