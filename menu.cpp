@@ -128,7 +128,6 @@ void Menu::keyPressEvent(QKeyEvent *event)
 
 void Menu::on_pushButton_clicked()
 {
-    QSound::play(":/png/imagens/ahh.wav");
     this->close();
 }
 

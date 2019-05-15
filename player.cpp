@@ -12,6 +12,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <windows.h>
+#include <QSound>
 
 int Player::getPontoUpgrade() const
 {
@@ -84,6 +85,8 @@ void Player::initPlayer(){
     this->setLife(5);
     this->setMaxLife(5);
     this->setForca(1);
+
+
 
      mainMenu.setNivel(0);
      mainMenu.setEspada(1);
@@ -319,6 +322,7 @@ void Player::keyPressEvent(QKeyEvent *event){
 
            if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
 
+               QSound::play(":/png/imagens/Roblox_Death_Sound_Effect-f49ELvryhao.wav");
 
 
                if (mainMenu.getDefesa() < 5){
