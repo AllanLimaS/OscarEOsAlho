@@ -11,6 +11,7 @@
 #include <QDir>
 #include <windows.h>
 #include <time.h>
+#include <QSound>
 
 #include <QDesktopWidget>
 
@@ -30,6 +31,9 @@ int main(int argc, char *argv[])
     Player * jogador = new Player(); 
     Saida * escada = new Saida();
 
+    QSound intro (":/png/imagens/Musica_Naruto_Flauta_Desafinada-X3S4ZNHH84I.wav");
+    intro.setLoops(5);
+    intro.play();
 
     QPixmap chao_png(QPixmap(":/png/imagens/chao.png"));
     for(int i = 0;i<13;i++){

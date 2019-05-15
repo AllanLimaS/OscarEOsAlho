@@ -11,6 +11,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
+#include <QSound>
 #include <windows.h>
 
 int Player::getPontoUpgrade() const
@@ -116,7 +117,7 @@ void Player :: atualizaPontos(){ // PASSA OS PONTOS DO JOGADOR PARA O MENU
     this->mainMenu.set_pontosMaxLife(this->mainMenu.getMaxLife());// SE TEM _ NO NOME È DO GRAFICO
 
     this->mainMenu.setLife(this->getLife());
-    this->mainMenu.set_pontosLife(this->mainMenu.getLife());
+    this->mainMenu.set_pontosLife(this->mainMenu.getMaxLife());
 
     this->mainMenu.setForca(this->getForca());
     this->mainMenu.set_pontosForca(this->mainMenu.getForca());// SE TEM _ NO NOME È DO GRAFICO
@@ -185,10 +186,6 @@ void Player::Volta(){
 
 }
 
-
-
-
-
 void Player::keyPressEvent(QKeyEvent *event){
 
     scene()->addItem(telaPiso);
@@ -199,16 +196,16 @@ void Player::keyPressEvent(QKeyEvent *event){
         inimigos_mapa = quant;
     }
 
-    this->lifeBar.setRect(0,550,this->getLife()*30,20);             // ISSO ATUALIZA A BARRA DE
-    this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);       //  VIDAAAAAAA
+    this->lifeBar.setRect(0,550,this->getLife()*30,20);
+    this->maxLifeBar.setRect(0,550,this->getMaxLife()*30,25);
 
 
-    if (event->key() == Qt::Key_Escape){    // esc quita do game
+    if (event->key() == Qt::Key_Escape){
         exit(1);
     }
 
-    if (event->key() == Qt::Key_Backspace){     // backspace abre menu
-        if(PISO_ATUAL % 5 == 0 ){  //SO PODE ABRIR O MENU NO PISO DA LOJA
+    if (event->key() == Qt::Key_Backspace){
+        if(PISO_ATUAL % 5 == 0 ){
             atualizaPontos();
             mainMenu.show();
             atualizaPlayer();
@@ -268,13 +265,11 @@ void Player::keyPressEvent(QKeyEvent *event){
                     delete (colliding_items[i]);
                     inimigos_mapa = inimigos_mapa - 1;
                     mainMenu.setPontosUgrade(mainMenu.getPontosUgrade()+1);
-                    // AKI FAZ A LOGICA DE DAR DANO NOS CHUCHU SELVAGENS
                 }
                     if(typeid(*(colliding_items[i]))== typeid (Chefes)){
                     scene()->removeItem(colliding_items[i]);
                     delete (colliding_items[i]);
                     inimigos_mapa = inimigos_mapa - 1;
-                    // AKI FAZ A LOGICA DE DAR DANO NO FELSKI
                 }
             }
             QTimer * timer = new QTimer();
@@ -289,7 +284,6 @@ void Player::keyPressEvent(QKeyEvent *event){
         for(int  i = 0, n = colliding_items.size(); i < n; i++){
 
             if(typeid(*(colliding_items[i]))== typeid (Saida)){
-
                 if(inimigos_mapa == 0){
                     PISO_ATUAL = PISO_ATUAL + 1;
                     telaPiso->setPiso(PISO_ATUAL);
@@ -306,9 +300,14 @@ void Player::keyPressEvent(QKeyEvent *event){
                     }else if(PISO_ATUAL == 11){
                         Chefes * chefe = new Chefes();
                         scene()->addItem(chefe);
+                        chefe->setPos(160, 160);
                         inimigos_mapa = inimigos_mapa + 1;
+                        criainimigo();
+                        inimigos_mapa = inimigos_mapa + quant;
 
-
+                    }if(PISO_ATUAL > 11){
+                        exit(1);
+                        //FAZER UMA TELA DE VITORIA
                     }else{
                         criainimigo();
                         inimigos_mapa = inimigos_mapa + quant;
@@ -318,8 +317,7 @@ void Player::keyPressEvent(QKeyEvent *event){
             };
 
            if(typeid(*(colliding_items[i]))== typeid (Inimigo)){
-
-
+               QSound::play(":/png/imagens/Roblox_Death_Sound_Effect-f49ELvryhao.wav");
 
                if (mainMenu.getDefesa() < 5){
                  mainMenu.setLife(getLife() - 3);
@@ -339,8 +337,6 @@ void Player::keyPressEvent(QKeyEvent *event){
                    initPlayer();
                    telaPiso->setPiso(PISO_ATUAL);
                }
-
-               qDebug()<<this->getLife();
           };
 
            if(typeid(*(colliding_items[i]))== typeid (Chefes)){
@@ -353,13 +349,10 @@ void Player::keyPressEvent(QKeyEvent *event){
                    setPos(0, 0);
                    initPlayer();
                    telaPiso->setPiso(PISO_ATUAL);
+                   scene()->removeItem(colliding_items[i]);
                    delete (colliding_items[i]);
-                   inimigos_mapa= 0;
+                   inimigos_mapa = 0;
                }
-
-               qDebug()<<this->getLife();
-
-                // AKI DIMINUIA A VIDA DAI NÉ ??????
 
             };
 
@@ -367,18 +360,13 @@ void Player::keyPressEvent(QKeyEvent *event){
                 scene()->removeItem(colliding_items[i]);
                 delete (colliding_items[i]);
                 inimigos_mapa = inimigos_mapa - 1;
-                //SÓ SAI DA SALA SE PEGAR O BAU
-                // AKI SE FAZ UM SISTEMA Q ADICIONA ALHO NA MOCHILA
                 mainMenu.setPontosUgrade(mainMenu.getPontosUgrade()+5);
-
            }
 
            if(typeid(*(colliding_items[i]))== typeid (Loja)){
                 scene()->removeItem(colliding_items[i]);
                 delete (colliding_items[i]);
                 inimigos_mapa = inimigos_mapa - 1;
-                //SÓ SAI DA SALA SE PEGAR O ALEx, digo ,a loja
-
            }
         }
 

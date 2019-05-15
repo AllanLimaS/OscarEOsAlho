@@ -10,12 +10,12 @@ Chefes::Chefes()
     QPixmap boss_png(QPixmap(":/png/imagens/boss.png"));
 
 
-    setRect(160, 160, 160, 160);
+    setRect(0, 0, 160, 160);
     setBrush(QBrush(boss_png));
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(100);
+    timer->start(150);
 }
 
 void Chefes::move(){
