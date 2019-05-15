@@ -302,10 +302,8 @@ void Player::keyPressEvent(QKeyEvent *event){
                         scene()->addItem(chefe);
                         chefe->setPos(160, 160);
                         inimigos_mapa = inimigos_mapa + 1;
-                        criainimigo();
-                        inimigos_mapa = inimigos_mapa + quant;
 
-                    }if(PISO_ATUAL > 11){
+                    }else if(PISO_ATUAL > 11){
                         exit(1);
                         //FAZER UMA TELA DE VITORIA
                     }else{
