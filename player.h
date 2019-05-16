@@ -18,6 +18,8 @@ private:
     Tela_piso * telaPiso = new Tela_piso();
 
 public:
+    Player();
+    static int dano;
     void keyPressEvent(QKeyEvent * event);
     int getPontoUpgrade() const;
     void setPontoUpgrade(int value);
@@ -32,9 +34,11 @@ public:
     int getPotion() const;
     void setPotion(int value);
     void initPlayer();
+    void initplayer(int nivel,int espada, int potion, int capacete, int peitoral, int pontoUpgrade, int life, int MaxLife, int forca); //sobrecarga
     void atualizaPontos();
     void atualizaPlayer();
     void criainimigo();
+    void imprime();
 public slots:
     void Volta();
 };

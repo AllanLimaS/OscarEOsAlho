@@ -21,6 +21,6 @@ void Tela_piso::setPiso(int value)
         setPlainText(QString("PISO : ") + QString::number(this->piso) + QString("    BAU"));
     }
     if(piso == 11){
-        setPlainText(QString("PISO : ") + QString::number(this->piso) + QString("    Boss God"));
+        setPlainText(QString("PISO : ") + QString::number(this->piso) + QString("    BOSS"));
     }
 }
