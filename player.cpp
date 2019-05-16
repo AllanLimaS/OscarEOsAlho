@@ -91,6 +91,7 @@ void Player::initPlayer(){
     this->setLife(5);
     this->setMaxLife(5);
     this->setForca(1);
+    this->setDefesa(0);
 
      mainMenu.setNivel(0);
      mainMenu.setEspada(1);
