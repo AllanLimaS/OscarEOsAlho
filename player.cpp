@@ -14,6 +14,8 @@
 #include <QSound>
 #include <windows.h>
 
+int Player::dano = 1;
+
 int Player::getPontoUpgrade() const
 {
     return pontoUpgrade;
@@ -74,6 +76,10 @@ void Player::setPotion(int value)
     potion = value;
 }
 
+void Player::imprime(){
+    qDebug()<< getDefesa() << getLife() << getMaxLife() << getForca() << this->nivel << this->pontoUpgrade << this->potion;
+}
+
 void Player::initPlayer(){
 
     this->setNivel(0);
@@ -103,6 +109,20 @@ void Player::initPlayer(){
     this->lifeBar.setRect(0,550,this->getLife()*30,20);
     this->lifeBar.setBrush(QBrush(Qt::red));
     this->scene()->addItem(&lifeBar);
+
+}
+
+void Player::initplayer(int nivel,int espada, int potion, int capacete, int peitoral, int pontoUpgrade, int life, int MaxLife, int forca){
+
+    this->setNivel(nivel);
+    this->setEspada(espada);
+    this->setPotion(potion);
+    this->setCapacete(capacete);
+    this->setPeitoral(peitoral);
+    this->setPontoUpgrade(pontoUpgrade);
+    this->setLife(life);
+    this->setMaxLife(MaxLife);
+    this->setForca(forca);
 
 }
 
@@ -318,14 +338,14 @@ void Player::keyPressEvent(QKeyEvent *event){
                QSound::play(":/png/imagens/Roblox_Death_Sound_Effect-f49ELvryhao.wav");
 
                if (mainMenu.getDefesa() < 5){
-                 mainMenu.setLife(getLife() - 3);
+                 mainMenu.setLife(getLife() - this->dano *3);
                  atualizaPlayer();
                } else if(mainMenu.getDefesa()>=5 and mainMenu.getDefesa()<=9){
-                   mainMenu.setLife(getLife() - 2);
+                   mainMenu.setLife(getLife() - this->dano *2);         // tapa do inimigo
                    atualizaPlayer();
 
                } else if(mainMenu.getDefesa()>9){
-               mainMenu.setLife(getLife() - 1);
+               mainMenu.setLife(getLife() - this->dano);
                atualizaPlayer();
                }
 
@@ -340,9 +360,9 @@ void Player::keyPressEvent(QKeyEvent *event){
            if(typeid(*(colliding_items[i]))== typeid (Chefes)){
 
 
-               mainMenu.setLife(getLife() - 7);
+               mainMenu.setLife(getLife() - this->dano *7);
                atualizaPlayer();
-               if(mainMenu.getLife() <=0){
+               if(mainMenu.getLife() <=0){                  //tapa do chefe
                    PISO_ATUAL = 0;
                    setPos(0, 0);
                    initPlayer();
@@ -370,5 +390,7 @@ void Player::keyPressEvent(QKeyEvent *event){
 
  }
 
+Player::Player(){
 
+}
 

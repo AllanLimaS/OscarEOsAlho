@@ -1,4 +1,6 @@
 #include "entidade.h"
+#include <QDebug>
+
 
 int Entidade::getLife() const
 {
@@ -38,6 +40,10 @@ int Entidade::getDefesa() const
 void Entidade::setDefesa(int value)
 {
     defesa = value;
+}
+
+void Entidade::imprime(){
+    qDebug()<< this->defesa << this->life << this->maxLife << this->forca;
 }
 
 Entidade::Entidade()

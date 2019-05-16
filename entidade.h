@@ -18,6 +18,7 @@ public:
     void setForca(int value);
     int getDefesa() const;
     void setDefesa(int value);
+    void imprime();
 };
 
 #endif // ENTIDADE_H
